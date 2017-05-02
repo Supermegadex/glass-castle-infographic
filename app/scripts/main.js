@@ -93,11 +93,40 @@
   var ctx = document.getElementById("chart-1");
   var southChart = new Chart(ctx, {
     type: 'pie',
-    data: data
+    data: data,
+    options: {
+        title: {
+            display: true,
+            text: 'Approval of Corporal Punishment in the South'
+        }
+    }
   });
   var ctx2 = document.getElementById("chart-2");
   var southChart = new Chart(ctx2, {
     type: 'pie',
     data: data
   });
+
 })();
+
+google.load('visualization', '1', {'packages': ['geochart']});
+google.setOnLoadCallback(drawVisualization);
+
+function drawVisualization() {
+var data = google.visualization.arrayToDataTable([
+  ['State'],
+  ['Idaho'],
+  ['Florida']
+]);
+
+var opts = {
+  region: 'US',
+  displayMode: 'regions',
+  resolution: 'provinces',
+  width: 640,
+  height: 480
+};
+var geochart = new google.visualization.GeoChart(
+  document.getElementById('visualization'));
+  geochart.draw(data, opts);
+};
